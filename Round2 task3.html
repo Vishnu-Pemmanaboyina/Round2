@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        .choice-container {
+            text-align: center;
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .pl{
+            display: block;
+            margin-top: 20px;
+        }
+
+        .image-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="color: blue;">Rock, Paper, Scissors Game</h1>
+        <p style="color: red;">Choose: Rock, Paper, or Scissors</p>
+
+        <div class="choice-container">
+            <div class="image-button">
+                <img src="image/rock.jpeg" style="width: 200px; height: 120px;">
+                <button id="rock" class="pl" style="background-color: green;border: none;color: white;padding: 10px;border-radius: 5px;">Rock</button>
+            </div>
+        </div>
+
+        <div class="choice-container">
+            <div class="image-button">
+                <img src="image/paper.jpeg" style="width: 200px; height: 120px;">
+                <button id="paper" class="pl" style="background-color: green;border: none;color: white;padding: 10px;border-radius: 5px;">Paper</button>
+            </div>
+        </div>
+
+        <div class="choice-container">
+            <div class="image-button">
+                <img src="image/scissors.jpeg" style="width: 200px; height: 120px;">
+                <button id="scissors" class="pl" style="background-color: green;border: none;color: white;padding: 10px;border-radius: 5px;">Scissors</button>
+            </div>
+        </div>
+
+        <p id="result"></p>
+    </center>
+
+    <script>
+        const choices = ["rock", "paper", "scissors"];
+
+        function other() {
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        }
+
+        function playRound(me, opponent) {
+            me = me.toLowerCase();
+            opponent = opponent.toLowerCase();
+
+            if (me === opponent) {
+                return "It's a tie!";
+            } else if (
+                (me === "rock" && opponent === "scissors") ||
+                (me === "paper" && opponent === "rock") ||
+                (me === "scissors" && opponent === "paper")
+            ) {
+                return `You win!`;
+            } else {
+                return `You lose!`;
+            }
+        }
+
+        const rockButton = document.getElementById("rock");
+        const paperButton = document.getElementById("paper");
+        const scissorsButton = document.getElementById("scissors");
+        const resultParagraph = document.getElementById("result");
+
+        rockButton.addEventListener("click", () => {
+            const opponent = other();
+            const result = playRound("rock", opponent);
+            resultParagraph.textContent = result;
+        });
+
+        paperButton.addEventListener("click", () => {
+            const opponent = other();
+            const result = playRound("paper", opponent);
+            resultParagraph.textContent = result;
+        });
+
+        scissorsButton.addEventListener("click", () => {
+            const opponent = other();
+            const result = playRound("scissors", opponent);
+            resultParagraph.textContent = result;
+        });
+    </script>
+</body>
+</html>
